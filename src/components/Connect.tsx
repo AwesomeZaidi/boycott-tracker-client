@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 import { usePlaidLink, PlaidLinkOnSuccess } from "react-plaid-link";
-import { Box, Button, Collapse, Typography } from "@mui/material";
+import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
 import { findMatchingCompanies } from "../utils";
 
 const client_id = "654071b04b5732001c52f1f1";
@@ -17,6 +18,11 @@ const Connect = () => {
   const toggleExplainer = () => {
     setExplainerOpen(!isExplainerOpen);
   };
+
+  const handleOpenInstagram = () => {
+    window.open("https://www.instagram.com/boycotttracker", "_blank");
+  };
+
   // get link_token from your server when component mounts
   useEffect(() => {
     const createLinkToken = async () => {
@@ -93,7 +99,7 @@ const Connect = () => {
 
   const shareImageAsset = async () => {
     const response = await fetch(
-      "https://www.oberlo.com/media/1603957802-image17-3.png?w=1824&fit=max".toString()
+      "https://i.ibb.co/LNvJ4wj/Instagram-story-1-1-1.png".toString()
     );
     const blobImageAsset = await response.blob();
     const filesArray = [
@@ -113,7 +119,11 @@ const Connect = () => {
   };
 
   return (
-    <Box m="3em auto" textAlign={"center"} width={"100vw"}>
+    <Box
+      m="3em auto"
+      textAlign={"center"}
+      maxWidth={transactions.length > 0 ? "100vw" : "60em"}
+    >
       {!(transactions.length > 0) && (
         <>
           <Typography
@@ -174,9 +184,21 @@ const Connect = () => {
               onClick={shareImageAsset}
               variant="contained"
             >
-              Screenshot and share on socials!
+              Share to Instagram
             </Button>
-            <Typography mt={3}>Follow @BoycottTracker</Typography>
+            <Box mt={4}>
+              <Typography
+                gutterBottom
+                className="connect"
+                variant="body1"
+                textAlign={"center"}
+              >
+                Connect with us
+              </Typography>
+              <IconButton onClick={handleOpenInstagram}>
+                <InstagramIcon />
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       ) : (
@@ -198,17 +220,19 @@ const Connect = () => {
               : "▼ How does this work?"}
           </Typography>
           <Collapse in={isExplainerOpen}>
-            <Typography mx={2}>
-              Once you securely connect your Bank Account through the trusted
-              provide, Plaid. we pull your monthly transactions and cross check
-              each of your transactions to see if they’re a part of any of
+            <Typography mx={2} variant="body1" textAlign={"center"} mb={4}>
+              After securely establishing a connection with your bank account
+              through the reputable provider, Plaid, we retrieve your monthly
+              transactions and meticulously scrutinize each one to identify any
+              affiliations with{" "}
               <a
-                href="https://som.yale.edu/story/2023/list-companies-have-condemned-hamas-terrorist-attack-israel"
                 target="_blank"
+                href="https://som.yale.edu/story/2023/list-companies-have-condemned-hamas-terrorist-attack-israel"
               >
-                these companies
+                companies
               </a>{" "}
-              whom openly support Isreal. Please note: we do not store anything.
+              openly endorsing <strong>Isreal</strong>. It is imperative to
+              emphasize that we do not retain any stored data.
             </Typography>
           </Collapse>
         </>

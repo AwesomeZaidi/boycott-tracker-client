@@ -91,6 +91,12 @@ $third: #000;
 }
 
 .share_btn {
+  border-radius: 13px !important;
   background-color: $secondary !important;
+  font-family: bold !important;
   color: $third !important;
+}
+
+.connect {
+  font-family: bold !important;
 }
