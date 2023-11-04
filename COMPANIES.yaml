@@ -1,0 +1,79 @@
+CompaniesBoycottedByBDS:
+  - Company: Caterpillar
+    Reason: "Accused of supplying bulldozers used to demolish Palestinian homes"
+  - Company: HP
+    Reason: "Accused of providing technology for Israeli military and checkpoints"
+  - Company: SodaStream
+    Reason: "Operated a factory in the West Bank (closed in 2015)"
+  - Company: G4S
+    Reason: "Provided services to Israeli prisons and checkpoints (sold most of its Israeli business)"
+  - Company: Motorola Solutions
+    Reason: "Provided communication services to Israeli security forces"
+  - Company: Airbnb
+    Reason: "Allowed listings in West Bank settlements (policy has changed)"
+  - Company: Puma
+    Reason: "Sponsorship of Israel Football Association, which includes teams from West Bank settlements"
+  - Company: Unilever (Ben & Jerry's)
+    Reason: "Sold products in Israeli settlements (announced change in policy)"
+  - Company: AWS
+    Reason: "Operates data centers in Israel"
+  - Company: Veolia
+    Reason: "Involved in waste management projects in Israeli settlements (exited most projects)"
+  - Company: Elbit Systems
+    Reason: "Produces surveillance systems and other tech for the separation barrier"
+  - Company: Booking.com
+    Reason: "Offers listings in West Bank settlements"
+  - Company: AXA
+    Reason: "Investments in Israeli banks and Elbit Systems"
+  - Company: Estée Lauder
+    Reason: "Chairman publicly supported Israeli settlements"
+  - Company: General Mills
+    Reason: "Operates a factory in an industrial zone in the West Bank"
+  - Company: Sabra
+    Reason: "Partially owned by a company accused of supporting the IDF"
+  - Company: Oracle
+    Reason: "Provides cloud and software services to Israeli firms and government"
+  - Company: Tripadvisor
+    Reason: "Features locations in West Bank settlements"
+  - Company: Hyundai Heavy Industries
+    Reason: "Equipment used in demolition of Palestinian structures"
+  - Company: JCB
+    Reason: "Equipment used in demolition of Palestinian structures and construction of settlements"
+  - Company: Cemex
+    Reason: "Involved in construction of settlements and separation wall"
+  - Company: RE/MAX
+    Reason: "Sold properties in West Bank settlements"
+  - Company: BlackRock
+    Reason: "Investments in companies operating in settlements"
+  - Company: Mekorot
+    Reason: "Israeli water company accused of discriminatory practices"
+  - Company: Egged
+    Reason: "Provides bus services connecting settlements"
+  - Company: Hapoalim, Leumi
+    Reason: "Israeli banks with branches in the West Bank"
+  - Company: Expedia
+    Reason: "Offers services in West Bank settlements"
+  - Company: Domino's Pizza
+    Reason: "Sent food to the IDF"
+  - Company: McDonald's
+    Reason: "Sent food to the IDF"
+  - Company: Papa John's
+    Reason: "Sent food to the IDF"
+  - Company: Pizza Hut
+    Reason: "Sent food to the IDF"
+  - Company: Burger King
+    Reason: "Franchises in Israel"
+  - Company: AXA
+    Reason: "Investments in Israeli banks and Elbit Systems"
+  - Company: Puma
+    Reason: "Sponsorship of Israel Football Association, which includes teams from West Bank settlements"
+  - Company: Siemens
+    Reason: "Business deals with Israeli entities and infrastructure projects"
+  - Company: AHAVA
+    Reason: "Products sourced from the Dead Sea; previously had factory in West Bank settlement"
+  - Company: Carrefour
+    Reason: "Sells Israeli products; operates in Israel"
+  - Company: HP (Hewlett-Packard)
+    Reason: "Provided technology for Israeli military and checkpoints"
+  - Company: SodaStream
+    Reason: "Operated a factory in the West Bank (closed in 2015)"

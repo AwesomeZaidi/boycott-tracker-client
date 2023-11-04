@@ -1,0 +1,96 @@
+@font-face {
+  font-family: thin;
+  src: url(../public/fonts/TTF/THICCCBOI-Thin.ttf);
+}
+
+@font-face {
+  font-family: regular;
+  src: url(../public/fonts/TTF/THICCCBOI-Regular.ttf);
+}
+
+@font-face {
+  font-family: medium;
+  src: url(../public/fonts/TTF/THICCCBOI-Medium.ttf);
+}
+
+@font-face {
+  font-family: semibold;
+  src: url(../public/fonts/TTF/THICCCBOI-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: bold;
+  src: url(../public/fonts/TTF/THICCCBOI-Bold.ttf);
+}
+
+@font-face {
+  font-family: extrabold;
+  src: url(../public/fonts/TTF/THICCCBOI-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: black;
+  src: url(../public/fonts/TTF/THICCCBOI-Black.ttf);
+}
+
+$primary: #4a3aff;
+$secondary: #ffffff;
+$third: #000;
+
+.title {
+  color: $primary;
+}
+
+.light-title {
+  color: $primary;
+  font-family: "regular" !important;
+  font-size: 34px;
+}
+
+.primary_btn {
+  background-color: $primary !important;
+  color: $secondary !important;
+  font-family: bold !important;
+  font-size: 15px !important;
+  border-radius: 13px !important;
+  min-width: 10em !important;
+}
+
+.small-semi {
+  font-family: semibold !important;
+  font-size: 14px !important;
+  color: #000 !important;
+}
+
+.x-bold-small {
+  font-family: extrabold !important;
+  font-size: 16px !important;
+  color: #db0403 !important;
+}
+
+.month {
+  font-family: extrabold !important;
+  font-size: 24px !important;
+  color: #db0403 !important;
+}
+
+.comp-name {
+  color: #fff !important;
+  font-size: 24px !important;
+  font-family: extrabold !important;
+}
+
+.pic-bg {
+  background: linear-gradient(
+    180deg,
+    rgba(219, 4, 3, 0) 0%,
+    #db0403 41.46%,
+    #db0403 100%
+  );
+  height: 86vh;
+}
+
+.share_btn {
+  background-color: $secondary !important;
+  color: $third !important;
+}
