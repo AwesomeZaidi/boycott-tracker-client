@@ -1,6 +1,6 @@
 # isreal-palestine-calculator
 
-## What is this
+## What is this?
 
 1. Landing page explaining what this is
 2. Connect your bank account
