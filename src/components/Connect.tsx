@@ -9,11 +9,107 @@ import { findMatchingCompanies } from "../utils";
 const client_id = "654071b04b5732001c52f1f1";
 const secret = "bc7a4a6ca8ef7ead85c8e5bc110313";
 
+function truncateString(inputString: string) {
+  if (inputString.length <= 15) {
+    return inputString;
+  } else {
+    return inputString.slice(0, 15) + "...";
+  }
+}
+
 const Connect = () => {
   const [token, setToken] = useState<string | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [isExplainerOpen, setExplainerOpen] = useState(false);
+  const [dynamicImage, setDynamicImage] = useState<any>(null);
+  const { totalAmount, companyNames } = findMatchingCompanies(
+    transactions || []
+  );
+
+  console.log("totalAmount:", totalAmount);
+  console.log("companyNames:", companyNames);
+
+  useEffect(() => {
+    const generateDynamicImage = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Create an Image object to load the external image
+      const externalImage = new Image();
+      externalImage.crossOrigin = "Anonymous"; // Enable cross-origin access
+      externalImage.src = "./ig-template.png";
+
+      externalImage.onload = () => {
+        // Set canvas dimensions to match the external image
+        canvas.width = externalImage.width;
+        canvas.height = externalImage.height;
+
+        // Draw the external image onto the canvas
+        // @ts-ignore
+        ctx.drawImage(externalImage, 0, 0);
+
+        // Add the user-specific content (company names) to the canvas
+        // @ts-ignore
+        ctx.fillStyle = "black"; // Set text color
+        // @ts-ignore
+        ctx.font = "72px black"; // Set font style
+        // @ts-ignore
+        ctx?.fillText(`$${totalAmount}`, 308, 755);
+        // @ts-ignore
+        ctx.font = "54px black"; // Set font style
+        companyNames.forEach((company, index) => {
+          const x = 308; // X-coordinate remains the same
+          const y = 848 + index * (54 + 30);
+          // @ts-ignore
+          ctx.fillText(truncateString(company), x, y); // Adjust coordinates as needed
+        });
+
+        // Convert the canvas to a PNG image
+        const dynamicImage = canvas.toDataURL("image/png");
+
+        setDynamicImage(dynamicImage);
+      };
+    };
+
+    generateDynamicImage();
+  }, [totalAmount, companyNames]);
+
+  const saveToDevice = () => {
+    if (dynamicImage) {
+      // Create an anchor element to trigger the download
+      const downloadLink = document.createElement("a");
+      downloadLink.href = dynamicImage;
+      downloadLink.download = "Boycott-Israel.png"; // Set the filename
+
+      // Trigger a click event on the anchor element to start the download
+      downloadLink.click();
+    }
+  };
+
+  const onShare = async () => {
+    if (dynamicImage) {
+      // Create a blob from the dynamic image data
+      const blob = await fetch(dynamicImage).then((response) =>
+        response.blob()
+      );
+
+      // Create a File object from the blob
+      const file = new File([blob], "Boycott-Israel.png", {
+        type: "image/png",
+        lastModified: new Date().getTime(),
+      });
+
+      // Prepare the share data with the dynamic image
+      const shareData = {
+        files: [file],
+      };
+
+      if (navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+      }
+    }
+  };
 
   const toggleExplainer = () => {
     setExplainerOpen(!isExplainerOpen);
@@ -91,32 +187,8 @@ const Connect = () => {
     // onExit
   });
 
-  const { totalAmount, companyNames } = findMatchingCompanies(
-    transactions || []
-  );
   console.log("companyNames:", companyNames);
   console.log("totalAmount:", totalAmount);
-
-  const shareImageAsset = async () => {
-    const response = await fetch(
-      "https://i.ibb.co/LNvJ4wj/Instagram-story-1-1-1.png".toString()
-    );
-    const blobImageAsset = await response.blob();
-    const filesArray = [
-      new File([blobImageAsset], `boycott.png`, {
-        type: "image/png",
-        lastModified: new Date().getTime(),
-      }),
-    ];
-    const shareData = {
-      title: `boycott`,
-      files: filesArray,
-    };
-
-    if (navigator.canShare && navigator.canShare(shareData)) {
-      await navigator.share(shareData);
-    }
-  };
 
   return (
     <Box
@@ -143,62 +215,34 @@ const Connect = () => {
       )}
 
       {transactions.length > 0 ? (
-        <Box mt={10} className="pic-bg">
-          <Typography
-            mx={4}
-            gutterBottom
-            className="small-semi"
-            color="#DB0403"
-          >
-            Find out how much you’re spending on companies that support Isreal.
-          </Typography>
-          <Typography
-            gutterBottom
-            className="x-bold-small"
-            variant="h6"
-            color="#DB0403"
-          >
-            #BoycottIsrael
-          </Typography>
-          <Typography gutterBottom className="month">
-            PAST 30 DAYS
-          </Typography>
-          <Typography gutterBottom variant="h2" color="#DB0403">
-            🩸 ${totalAmount}
-          </Typography>
-          {companyNames.map((comp) => (
-            <Typography
-              gutterBottom
-              className="comp-name"
-              variant="h5"
-              textAlign={"center"}
-              color="#DB0403"
-            >
-              {comp.toUpperCase()}
-            </Typography>
-          ))}
+        <Box m="0 auto" textAlign={"center"}>
+          <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+            <img
+              style={{
+                height: "66vh",
+                borderRadius: "13px",
+                marginBottom: "2em",
+              }}
+              src={dynamicImage}
+              alt="Dynamic Image"
+            />
 
-          <Box mt={10}>
             <Button
               className="share_btn"
-              onClick={shareImageAsset}
+              onClick={onShare}
               variant="contained"
+              style={{ marginBottom: "1em" }}
             >
               Share to Instagram
             </Button>
-            <Box mt={4}>
-              <Typography
-                gutterBottom
-                className="connect"
-                variant="body1"
-                textAlign={"center"}
-              >
-                Connect with us
-              </Typography>
-              <IconButton onClick={handleOpenInstagram}>
-                <InstagramIcon />
-              </IconButton>
-            </Box>
+            <Button
+              className="share_btn"
+              onClick={saveToDevice}
+              variant="contained"
+              style={{ marginBottom: "4em" }}
+            >
+              Save to device
+            </Button>
           </Box>
         </Box>
       ) : (
