@@ -122,17 +122,14 @@ const Connect = () => {
   // get link_token from your server when component mounts
   useEffect(() => {
     const createLinkToken = async () => {
-      const res = await axios.post(
-        "https://boycott-tracker-server-905a00b98cf6.herokuapp.com/plaid/link",
-        {
-          client_id,
-          secret,
-          client_name: "calculator app",
-          country_codes: ["US"],
-          language: "en",
-          products: ["auth"],
-        }
-      );
+      const res = await axios.post("http://localhost:4000/plaid/link", {
+        client_id,
+        secret,
+        client_name: "calculator app",
+        country_codes: ["US"],
+        language: "en",
+        products: ["auth"],
+      });
       console.log("res:", res);
       if (res.data?.linkToken) {
         setToken(res.data.linkToken);
@@ -145,7 +142,7 @@ const Connect = () => {
     const fetchTransactions = async () => {
       try {
         const res = await axios.post(
-          "https://boycott-tracker-server-905a00b98cf6.herokuapp.com/plaid/transactions",
+          "http://localhost:4000/plaid/transactions",
           {
             accessToken,
           }
@@ -168,13 +165,10 @@ const Connect = () => {
       // https://plaid.com/docs/api/tokens/#token-exchange-flow
       console.log("onSuccess");
       console.log(linkToken, metadata);
-      const res = await axios.post(
-        "https://boycott-tracker-server-905a00b98cf6.herokuapp.com/plaid/exchange",
-        {
-          // @ts-ignore
-          public_token: metadata.public_token,
-        }
-      );
+      const res = await axios.post("http://localhost:4000/plaid/exchange", {
+        // @ts-ignore
+        public_token: metadata.public_token,
+      });
       setAccessToken(res.data.accessToken);
     },
     []
